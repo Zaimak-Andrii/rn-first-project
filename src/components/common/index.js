@@ -4,3 +4,4 @@ export * from './PasswordInput';
 export * from './TitleText';
 export * from './AuthButton';
 export * from './LinkButton';
+export * from './Avatar';

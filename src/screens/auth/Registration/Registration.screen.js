@@ -1,8 +1,7 @@
 import { ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './Registration.styles';
-import { EmailInput, Input, PasswordInput, TitleText, AuthButton, LinkButton } from 'components/common';
+import { EmailInput, Input, PasswordInput, TitleText, AuthButton, LinkButton, Avatar } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
-import { Avatar } from 'components/common/Avatar';
 import { useForm } from 'react-hook-form';
 
 const bg = require('@images/auth-bg.jpg');
@@ -37,7 +36,7 @@ export default function RegistrationScreen() {
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : ''}>
             <View style={[styles.content, isKeyboardOpen ? styles.keyboardOpen : {}]}>
               <View style={styles.avatarContainer}>
-                <Avatar source={bg} style={styles.avatar} />
+                <Avatar source={null} style={styles.avatar} />
               </View>
               <TitleText title='Sign up' style={styles.title} />
               <View style={styles.form}>

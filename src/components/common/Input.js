@@ -1,8 +1,13 @@
 import { forwardRef, useState } from 'react';
+import { useController } from 'react-hook-form';
 import { StyleSheet, TextInput } from 'react-native';
 
-export const Input = ({ style, ...props }) => {
+export const Input = ({ control, style, ...props }) => {
   const [focusStyle, setFocusStyle] = useState({});
+  const { field } = useController({
+    control,
+    name: props.name,
+  });
 
   const focusHandler = () => {
     setFocusStyle({
@@ -10,9 +15,11 @@ export const Input = ({ style, ...props }) => {
       borderColor: '#FF6C00',
     });
   };
+
   const blurHandler = () => {
     setFocusStyle({});
   };
+
   return (
     <TextInput
       autoCapitalize='none'
@@ -21,6 +28,8 @@ export const Input = ({ style, ...props }) => {
       keyboardType='default'
       placeholderTextColor='#BDBDBD'
       style={[styles.input, focusStyle, style]}
+      value={field.value}
+      onChangeText={field.onChange}
       onFocus={focusHandler}
       onBlur={blurHandler}
       {...props}

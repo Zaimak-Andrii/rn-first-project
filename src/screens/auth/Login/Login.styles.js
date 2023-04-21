@@ -14,8 +14,8 @@ export default StyleSheet.create({
   content: {
     position: 'relative',
 
-    paddingTop: 92,
-    paddingBottom: 78,
+    paddingTop: 32,
+    paddingBottom: 144,
     paddingHorizontal: 16,
 
     borderTopLeftRadius: 25,
@@ -25,18 +25,7 @@ export default StyleSheet.create({
   },
 
   keyboardOpen: {
-    marginBottom: -175,
-  },
-
-  avatarContainer: {
-    position: 'absolute',
-    top: -60,
-    alignSelf: 'center',
-  },
-
-  avatar: {
-    width: 120,
-    height: 120,
+    marginBottom: -241,
   },
 
   title: {

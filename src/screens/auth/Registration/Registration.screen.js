@@ -1,8 +1,10 @@
-import { ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
+import { ImageBackground, Keyboard, KeyboardAvoidingView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './Registration.styles';
 import { EmailInput, Input, PasswordInput, TitleText, AuthButton, LinkButton, Avatar } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import { screen } from 'constants';
 
 const bg = require('@images/auth-bg.jpg');
 const defaultValues = {
@@ -12,6 +14,7 @@ const defaultValues = {
 };
 
 export default function RegistrationScreen() {
+  const { navigate } = useNavigation();
   const isKeyboardOpen = useKeyboard();
   const { control, handleSubmit, reset } = useForm({
     defaultValues,
@@ -19,6 +22,10 @@ export default function RegistrationScreen() {
 
   const touchHandler = () => {
     Keyboard.dismiss();
+  };
+
+  const gotoSignInHandler = () => {
+    navigate(screen.SIGN_IN);
   };
 
   const submitFormHandler = (data) => {
@@ -44,7 +51,10 @@ export default function RegistrationScreen() {
                 <EmailInput name='email' placeholder='Email' control={control} />
                 <PasswordInput name='password' placeholder='Password' control={control} />
                 <AuthButton text='Sign up' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
-                <LinkButton text='Already have an account? Sign in' />
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>Already have an account?</Text>
+                  <LinkButton text=' Sign In' onPress={gotoSignInHandler} />
+                </View>
               </View>
             </View>
           </KeyboardAvoidingView>

@@ -3,12 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-gesture-handler';
-import RegistrationScreen from 'screens/auth/Registration/Registration.screen';
-import LoginScreen from 'screens/auth/Login/Login.screen';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from 'stack/AuthStack';
+import { useScreens } from 'hooks/useScreens';
 
 export default function App() {
+  const screens = useScreens(true);
   let [fontsLoaded] = useFonts({
     'Roboto-Regular': require('@fonts/Roboto/Roboto-Regular.ttf'),
     'Roboto-Medium': require('@fonts/Roboto/Roboto-Medium.ttf'),
@@ -27,9 +26,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={layoutRootViewHandler}>
-      <NavigationContainer>
-        <AuthStack />
-      </NavigationContainer>
+      <NavigationContainer>{screens}</NavigationContainer>
     </View>
   );
 }
@@ -38,7 +35,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });

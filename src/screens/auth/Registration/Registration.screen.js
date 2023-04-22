@@ -5,6 +5,8 @@ import useKeyboard from '../../../hooks/useKeyboard';
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
 import { screen } from 'constants';
+import { useDispatch } from 'react-redux';
+import { registration } from 'redux/auth/auth.slice';
 
 const bg = require('@images/auth-bg.jpg');
 const defaultValues = {
@@ -15,6 +17,7 @@ const defaultValues = {
 
 export default function RegistrationScreen() {
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
   const isKeyboardOpen = useKeyboard();
   const { control, handleSubmit, reset } = useForm({
     defaultValues,
@@ -30,6 +33,7 @@ export default function RegistrationScreen() {
 
   const submitFormHandler = (data) => {
     console.log('Registration data: ', data);
+    dispatch(registration({ username: data.username, email: data.email }));
     reset();
   };
 

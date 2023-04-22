@@ -1,17 +1,16 @@
 import { ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
-import styles from './Registration.styles';
-import { EmailInput, Input, PasswordInput, TitleText, AuthButton, LinkButton, Avatar } from 'components/common';
+import styles from './Login.styles';
+import { EmailInput, PasswordInput, TitleText, AuthButton, LinkButton } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
 import { useForm } from 'react-hook-form';
 
 const bg = require('@images/auth-bg.jpg');
 const defaultValues = {
-  username: '',
   email: '',
   password: '',
 };
 
-export default function RegistrationScreen() {
+export default function LoginScreen() {
   const isKeyboardOpen = useKeyboard();
   const { control, handleSubmit, reset } = useForm({
     defaultValues,
@@ -22,7 +21,7 @@ export default function RegistrationScreen() {
   };
 
   const submitFormHandler = (data) => {
-    console.log('Registration data: ', data);
+    console.log('Login data: ', data);
     reset();
   };
 
@@ -35,16 +34,12 @@ export default function RegistrationScreen() {
         <ImageBackground source={bg} style={styles.background}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : ''}>
             <View style={[styles.content, isKeyboardOpen ? styles.keyboardOpen : {}]}>
-              <View style={styles.avatarContainer}>
-                <Avatar source={null} style={styles.avatar} />
-              </View>
-              <TitleText title='Sign up' style={styles.title} />
+              <TitleText title='Sign in' style={styles.title} />
               <View style={styles.form}>
-                <Input name='username' placeholder='Username' control={control} />
-                <EmailInput name='email' placeholder='Email' control={control} />
-                <PasswordInput name='password' placeholder='Password' control={control} />
-                <AuthButton text='Sign up' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
-                <LinkButton text='Already have an account? Sign in' />
+                <EmailInput name='email' control={control} placeholder='Email' />
+                <PasswordInput name='password' control={control} placeholder='Password' />
+                <AuthButton text='Sign In' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
+                <LinkButton text="Don't have an account? Sign Up" />
               </View>
             </View>
           </KeyboardAvoidingView>

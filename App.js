@@ -2,10 +2,15 @@ import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import RegistrationScreen from 'screens/auth/Registration/Registration.screen';
-import LoginScreen from 'screens/auth/Login/Login.screen';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { useScreens } from 'hooks/useScreens';
+import { selectIsAuth } from 'redux/auth/auth.selectors';
 
 export default function App() {
+  const isAuth = useSelector(selectIsAuth);
+  const screens = useScreens(isAuth);
   let [fontsLoaded] = useFonts({
     'Roboto-Regular': require('@fonts/Roboto/Roboto-Regular.ttf'),
     'Roboto-Medium': require('@fonts/Roboto/Roboto-Medium.ttf'),
@@ -24,8 +29,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={layoutRootViewHandler}>
-      <RegistrationScreen />
-      {/* <LoginScreen /> */}
+      <NavigationContainer>{screens}</NavigationContainer>
     </View>
   );
 }
@@ -34,7 +38,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });

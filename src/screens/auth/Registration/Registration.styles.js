@@ -43,6 +43,19 @@ export default StyleSheet.create({
     marginBottom: 32,
   },
 
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  text: {
+    fontFamily: 'Roboto-Regular',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#1B4371',
+    textAlign: 'center',
+  },
+
   form: {
     gap: 16,
   },

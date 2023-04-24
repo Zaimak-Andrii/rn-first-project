@@ -1,8 +1,12 @@
-import { ImageBackground, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
+import { ImageBackground, Keyboard, KeyboardAvoidingView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './Login.styles';
 import { EmailInput, PasswordInput, TitleText, AuthButton, LinkButton } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import { screen } from 'constants';
+import { useDispatch } from 'react-redux';
+import { login } from 'redux/auth/auth.slice';
 
 const bg = require('@images/auth-bg.jpg');
 const defaultValues = {
@@ -11,6 +15,8 @@ const defaultValues = {
 };
 
 export default function LoginScreen() {
+  const { navigate } = useNavigation();
+  const dispatch = useDispatch();
   const isKeyboardOpen = useKeyboard();
   const { control, handleSubmit, reset } = useForm({
     defaultValues,
@@ -20,8 +26,13 @@ export default function LoginScreen() {
     Keyboard.dismiss();
   };
 
+  const gotoSignUpHandler = () => {
+    navigate(screen.SIGN_UP);
+  };
+
   const submitFormHandler = (data) => {
     console.log('Login data: ', data);
+    dispatch(login({ username: 'anonymous', email: data.email }));
     reset();
   };
 
@@ -39,7 +50,10 @@ export default function LoginScreen() {
                 <EmailInput name='email' control={control} placeholder='Email' />
                 <PasswordInput name='password' control={control} placeholder='Password' />
                 <AuthButton text='Sign In' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
-                <LinkButton text="Don't have an account? Sign Up" />
+                <View style={styles.textContainer}>
+                  <Text style={styles.text}>Don't have an account?</Text>
+                  <LinkButton text=' Sign Up' onPress={gotoSignUpHandler} />
+                </View>
               </View>
             </View>
           </KeyboardAvoidingView>

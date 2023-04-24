@@ -1,6 +1,6 @@
 import { ImageBackground, Keyboard, KeyboardAvoidingView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './Login.styles';
-import { EmailInput, PasswordInput, TitleText, AuthButton, LinkButton } from 'components/common';
+import { EmailInput, PasswordInput, TitleText, AppButton, LinkButton } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
@@ -49,7 +49,7 @@ export default function LoginScreen() {
               <View style={styles.form}>
                 <EmailInput name='email' control={control} placeholder='Email' />
                 <PasswordInput name='password' control={control} placeholder='Password' />
-                <AuthButton text='Sign In' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
+                <AppButton text='Sign In' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>Don't have an account?</Text>
                   <LinkButton text=' Sign Up' onPress={gotoSignUpHandler} />

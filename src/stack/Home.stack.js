@@ -48,7 +48,6 @@ export default function HomeStack() {
         }}
         component={ProfileScreen}
       />
-      {/* <Stack.Screen name={screen.COMMENTS} options={{}} component={CommentsScreen} /> */}
     </Stack.Navigator>
   );
 }

@@ -11,7 +11,11 @@ export default function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name={screen.HOME} options={{ headerShown: false }} component={PostsStack} />
-      <Stack.Screen name={screen.COMMENTS} options={{ titlce: 'Comments' }} component={CommentsScreen} />
+      <Stack.Screen
+        name={screen.COMMENTS}
+        options={{ titlce: 'Comments', headerLeft: () => <BackArrow /> }}
+        component={CommentsScreen}
+      />
       <Stack.Screen
         name={screen.MAP}
         options={{ title: 'Map', headerLeft: () => <BackArrow /> }}

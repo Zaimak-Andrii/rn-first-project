@@ -2,7 +2,7 @@ import { cloneElement } from 'react';
 import { useController } from 'react-hook-form';
 import { StyleSheet, TextInput, View } from 'react-native';
 
-export const PostInput = ({ control, inputStyle, groupStyle, leftIcon, ...props }) => {
+export const PostInput = ({ control, inputStyle, groupStyle, leftIcon, rightIcon, ...props }) => {
   const { field } = useController({
     control,
     name: props.name,
@@ -12,7 +12,7 @@ export const PostInput = ({ control, inputStyle, groupStyle, leftIcon, ...props 
     <View style={[styles.group, groupStyle]}>
       {leftIcon && cloneElement(leftIcon, { style: [leftIcon.props.style, styles.icon] })}
       <TextInput
-        style={[styles.input, { paddingLeft: leftIcon ? 28 : 0 }, inputStyle]}
+        style={[styles.input, leftIcon && styles.inputLeftPadding, rightIcon && styles.inputRightPadding, inputStyle]}
         autoCapitalize='none'
         autoCorrect={false}
         inputMode='text'
@@ -24,6 +24,7 @@ export const PostInput = ({ control, inputStyle, groupStyle, leftIcon, ...props 
         ref={field.ref}
         {...props}
       />
+      {rightIcon && cloneElement(rightIcon, { style: [rightIcon.props.style, styles.icon, styles.iconRight] })}
     </View>
   );
 };
@@ -47,7 +48,19 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E8E8E8',
   },
 
+  inputLeftPadding: {
+    paddingLeft: 28,
+  },
+
+  inputRightPadding: {
+    paddingRight: 50,
+  },
+
   icon: {
     position: 'absolute',
+  },
+
+  iconRight: {
+    right: 8,
   },
 });

@@ -16,8 +16,8 @@ import { addPost } from 'redux/posts/posts.slice';
 import { screen } from 'constants';
 
 const schema = object({
-  title: string().min(6).max(16).required(),
-  locationTitle: string().min(6).max(30).required(),
+  title: string().min(3).max(30).required(),
+  locationTitle: string().min(3).max(30).required(),
 });
 
 export default function CreatePostScreen() {

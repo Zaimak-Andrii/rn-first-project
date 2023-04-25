@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export const AuthButton = ({ text, style, ...props }) => {
+export const AppButton = ({ text, style, textStyle, ...props }) => {
   return (
     <TouchableOpacity activeOpacity={0.7} style={[styles.button, style]} {...props}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 };

@@ -1,6 +1,6 @@
 import { ImageBackground, Keyboard, KeyboardAvoidingView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './Registration.styles';
-import { EmailInput, Input, PasswordInput, TitleText, AuthButton, LinkButton, Avatar } from 'components/common';
+import { EmailInput, Input, PasswordInput, TitleText, LinkButton, Avatar, AppButton } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
@@ -54,7 +54,7 @@ export default function RegistrationScreen() {
                 <Input name='username' placeholder='Username' control={control} />
                 <EmailInput name='email' placeholder='Email' control={control} />
                 <PasswordInput name='password' placeholder='Password' control={control} />
-                <AuthButton text='Sign up' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
+                <AppButton text='Sign up' style={{ marginTop: 27 }} onPress={handleSubmit(submitFormHandler)} />
                 <View style={styles.textContainer}>
                   <Text style={styles.text}>Already have an account?</Text>
                   <LinkButton text=' Sign In' onPress={gotoSignInHandler} />

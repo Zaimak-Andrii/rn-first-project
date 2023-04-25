@@ -1,63 +1,22 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { screen } from 'constants';
-import CreatePostScreen from 'screens/CreatePost/CreatePost.screen';
-import ProfileScreen from 'screens/Profile/Profile.screen';
 import PostsStack from './Posts.stack';
-import BottomTabIcon from 'components/BottomTabIcon';
+import CommentsScreen from 'screens/Comments/Comments.screen';
+import MapScreen from 'screens/Map/Map.screen';
 import { BackArrow } from 'components/common';
 
-const Stack = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function HomeStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          height: 83,
-          paddingTop: 9,
-        },
-      }}
-    >
+    <Stack.Navigator>
+      <Stack.Screen name={screen.HOME} options={{ headerShown: false }} component={PostsStack} />
+      <Stack.Screen name={screen.COMMENTS} options={{ titlce: 'Comments' }} component={CommentsScreen} />
       <Stack.Screen
-        name={screen.HOME}
-        options={{
-          title: 'Posts',
-          headerShown: false,
-          tabBarIcon: (props) => <BottomTabIcon {...props} name='grid' />,
-        }}
-        component={PostsStack}
-      />
-      <Stack.Screen
-        name={screen.CREATE_POST}
-        options={{
-          title: 'Create new post',
-          tabBarIcon: (props) => <BottomTabIcon {...props} name='plus' />,
-          headerLeft: () => <BackArrow />,
-          tabBarStyle: {
-            display: 'none',
-          },
-        }}
-        component={CreatePostScreen}
-      />
-      <Stack.Screen
-        name={screen.PROFILE}
-        options={{
-          headerShown: false,
-          tabBarIcon: (props) => <BottomTabIcon {...props} name='user' />,
-        }}
-        component={ProfileScreen}
+        name={screen.MAP}
+        options={{ title: 'Map', headerLeft: () => <BackArrow /> }}
+        component={MapScreen}
       />
     </Stack.Navigator>
   );
 }
-
-/*
-
-<AntDesign name="appstore-o" size={24} color="black" />
-
-<Feather name="grid" size={24} color="black" />
-
-<Ionicons name="grid-outline" size={24} color="black" />
-
-*/

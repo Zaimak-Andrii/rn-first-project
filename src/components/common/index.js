@@ -7,3 +7,4 @@ export * from './LinkButton';
 export * from './Avatar';
 export * from './BackArrow';
 export * from './PostInput';
+export * from './LogoutButton';

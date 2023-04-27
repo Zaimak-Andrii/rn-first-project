@@ -28,7 +28,7 @@ export default function ProfileScreen() {
     <View style={styles.container}>
       <ImageBackground source={bg} style={styles.background}>
         <View style={styles.content}>
-          <Avatar style={styles.avatar} source={{ uri: null }} />
+          <Avatar style={styles.avatar} source={{ uri: avatar }} />
           <LogoutButton style={styles.logoutButton} />
           <Text style={styles.name}>{username}</Text>
           <FlatList

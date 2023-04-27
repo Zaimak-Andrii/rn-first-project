@@ -1,3 +1,12 @@
+import {
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_DB_URL,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+} from '@env';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, initializeAuth } from 'firebase/auth';
@@ -6,13 +15,13 @@ import { getStorage } from 'firebase/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDum-T6j5LM96pg-7gODuxnTzF-5RFTR2A',
-  authDomain: 'react-native-posts-d8ad8.firebaseapp.com',
-  databaseURL: 'https://react-native-posts-d8ad8-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'react-native-posts-d8ad8',
-  storageBucket: 'react-native-posts-d8ad8.appspot.com',
-  messagingSenderId: '690175620715',
-  appId: '1:690175620715:web:2a52d1bc270914ee40e32e',
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN,
+  databaseURL: FIREBASE_DB_URL,
+  projectId: FIREBASE_PROJECT_ID,
+  storageBucket: FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+  appId: FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

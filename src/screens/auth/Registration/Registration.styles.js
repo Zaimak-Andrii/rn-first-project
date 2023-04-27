@@ -39,6 +39,23 @@ export default StyleSheet.create({
     height: 120,
   },
 
+  avatarAddButton: {
+    position: 'absolute',
+    right: -12,
+    bottom: 14,
+
+    width: 25,
+    height: 25,
+
+    overflow: 'hidden',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    backgroundColor: '#ffffff',
+    borderRadius: 25,
+  },
+
   title: {
     marginBottom: 32,
   },

@@ -15,6 +15,7 @@ export default StyleSheet.create({
     overflow: 'hidden',
 
     borderRadius: 8,
+    backgroundColor: '#e8e8e8',
   },
 
   image: {

@@ -1,18 +1,29 @@
-import { ImageBackground, Keyboard, KeyboardAvoidingView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { useState } from 'react';
+import {
+  ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { signUpThunk } from 'redux/auth/auth.thunk';
 import styles from './Registration.styles';
 import { EmailInput, Input, PasswordInput, TitleText, LinkButton, Avatar, AppButton } from 'components/common';
 import useKeyboard from '../../../hooks/useKeyboard';
-import { useForm } from 'react-hook-form';
-import { useNavigation } from '@react-navigation/native';
 import { screen } from 'constants';
-import { useDispatch } from 'react-redux';
-import { registration } from 'redux/auth/auth.slice';
 
 const bg = require('@images/auth-bg.jpg');
 const defaultValues = {
-  username: '',
-  email: '',
-  password: '',
+  username: 'Andrii Zaimak',
+  email: 'dev.andrii.zaimak@gmail.com',
+  password: '1234567890',
 };
 
 export default function RegistrationScreen() {
@@ -22,6 +33,7 @@ export default function RegistrationScreen() {
   const { control, handleSubmit, reset } = useForm({
     defaultValues,
   });
+  const [avatar, setAvatar] = useState(null);
 
   const touchHandler = () => {
     Keyboard.dismiss();
@@ -31,9 +43,31 @@ export default function RegistrationScreen() {
     navigate(screen.SIGN_IN);
   };
 
-  const submitFormHandler = (data) => {
-    console.log('Registration data: ', data);
-    dispatch(registration({ username: data.username, email: data.email }));
+  const chooseAvatarHandler = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.canceled) {
+        setAvatar(result.assets[0].uri);
+      }
+    } catch (error) {}
+  };
+
+  const pressAvatarButtonHandler = async () => {
+    if (avatar) {
+      setAvatar(null);
+    } else {
+      chooseAvatarHandler();
+    }
+  };
+
+  const submitFormHandler = async (data) => {
+    await dispatch(signUpThunk({ ...data, avatar }));
     reset();
   };
 
@@ -47,7 +81,14 @@ export default function RegistrationScreen() {
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : ''}>
             <View style={[styles.content, isKeyboardOpen ? styles.keyboardOpen : {}]}>
               <View style={styles.avatarContainer}>
-                <Avatar source={null} style={styles.avatar} />
+                <Avatar source={avatar && { uri: avatar }} style={styles.avatar} />
+                <TouchableOpacity style={styles.avatarAddButton} activeOpacity={0.8} onPress={pressAvatarButtonHandler}>
+                  {avatar ? (
+                    <AntDesign name='closecircleo' size={25} color='#BDBDBD' />
+                  ) : (
+                    <AntDesign name='pluscircleo' size={25} color='#FF6C00' />
+                  )}
+                </TouchableOpacity>
               </View>
               <TitleText title='Sign up' style={styles.title} />
               <View style={styles.form}>

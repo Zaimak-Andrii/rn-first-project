@@ -19,6 +19,8 @@ export default StyleSheet.create({
     overflow: 'hidden',
 
     borderRadius: 8,
+
+    backgroundColor: '#e8e8e8',
   },
 
   image: {
@@ -30,7 +32,6 @@ export default StyleSheet.create({
 
   list: {
     flex: 1,
-    backgroundColor: 'yellow',
   },
 
   form: {

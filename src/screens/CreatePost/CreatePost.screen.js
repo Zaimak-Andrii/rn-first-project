@@ -11,9 +11,10 @@ import AppCamera from 'components/AppCamera';
 import { PostInput } from 'components/common/PostInput';
 import { useLocation } from 'hooks/useLocation';
 import styles from './CreatePost.styles';
-import { useDispatch } from 'react-redux';
-import { addPost } from 'redux/posts/posts.slice';
 import { screen } from 'constants';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'redux/auth/auth.selectors';
+import { addPostService } from 'firebase/service';
 
 const schema = object({
   title: string().min(3).max(30).required(),
@@ -21,7 +22,7 @@ const schema = object({
 });
 
 export default function CreatePostScreen() {
-  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const { navigate } = useNavigation();
   const [photo, setPhoto] = useState(null);
   const { location } = useLocation();
@@ -51,13 +52,16 @@ export default function CreatePostScreen() {
       if (!result.canceled) {
         setPhoto(result.assets[0].uri);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const publishPostHandler = async (data) => {
     try {
-      console.log('Post', { photo, ...data, location: location.coords });
-      dispatch(addPost({ photo, ...data, location: location.coords }));
+      const post = { ...data, photo, location: location.coords, owner: user };
+      await addPostService(post);
+
       navigate(screen.POSTS);
       reset();
     } catch (error) {

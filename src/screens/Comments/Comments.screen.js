@@ -44,7 +44,7 @@ export default function CommentsScreen() {
   };
 
   const changeListHandler = () => {
-    flatListRef.current.scrollToEnd({ animated: true });
+    if (comments.length > 0) flatListRef.current.scrollToEnd({ animated: true });
   };
 
   // clear message input when screen inactive

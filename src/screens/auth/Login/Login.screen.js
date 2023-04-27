@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
 import { screen } from 'constants';
 import { useDispatch } from 'react-redux';
-import { login } from 'redux/auth/auth.slice';
+import { signInThunk } from 'redux/auth/auth.thunk';
 
 const bg = require('@images/auth-bg.jpg');
 const defaultValues = {
-  email: '',
-  password: '',
+  email: 'dev.andrii.zaimak@gmail.com',
+  password: '1234567890',
 };
 
 export default function LoginScreen() {
@@ -30,9 +30,8 @@ export default function LoginScreen() {
     navigate(screen.SIGN_UP);
   };
 
-  const submitFormHandler = (data) => {
-    console.log('Login data: ', data);
-    dispatch(login({ username: 'anonymous', email: data.email }));
+  const submitFormHandler = async (data) => {
+    await dispatch(signInThunk(data));
     reset();
   };
 

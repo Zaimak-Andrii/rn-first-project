@@ -4,12 +4,11 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
 import { useScreens } from 'hooks/useScreens';
-import { selectIsAuth } from 'redux/auth/auth.selectors';
+import { useAuth } from 'hooks/useAuth';
 
 export default function App() {
-  const isAuth = useSelector(selectIsAuth);
+  const { isAuth, isLoading } = useAuth();
   const screens = useScreens(isAuth);
   let [fontsLoaded] = useFonts({
     'Roboto-Regular': require('@fonts/Roboto/Roboto-Regular.ttf'),
@@ -23,7 +22,7 @@ export default function App() {
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded || isLoading) {
     return null;
   }
 
